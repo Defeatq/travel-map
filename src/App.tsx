@@ -11,7 +11,7 @@ function App() {
 
       <Header />
 
-      <Grid container spacing={ 4 } sx={{ width: '100%' }}>
+      <Grid container spacing={{ xs: 0, md: 4 }} sx={{ width: '100%' }}>
         <Grid item xs={ 12 } md={ 4 }>
           <List />
         </Grid>
