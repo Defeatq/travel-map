@@ -1,4 +1,5 @@
 import { AppBar, Autocomplete, Box, TextField, Toolbar, Typography } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 function Header() {
   return (
@@ -13,12 +14,9 @@ function Header() {
           </Typography>
           <div>
             <div>
-
+              <SearchIcon />
             </div>
-            <TextField label="Search" variant="outlined" sx={{
-              '& legend': { display: 'none', },
-              '& fieldset': { top: 0 },
-            }}/>
+            <TextField label="Search" variant="outlined" InputLabelProps={{ shrink: false }}/>
           </div>
         </Box>
       </Toolbar>
