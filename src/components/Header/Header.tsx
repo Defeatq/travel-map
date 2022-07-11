@@ -19,7 +19,12 @@ function Header() {
             <div className={ classes.searchIcon }>
               <SearchIcon />
             </div>
-            <TextField placeholder="Search..." label="" variant="outlined" InputProps={{ className: classes.searchInput, }}/>
+            <TextField placeholder="Search..." label="" variant="outlined" 
+                      InputProps={{ 
+                        className: classes.searchInput, 
+                        classes: { 
+                          focused: classes.inputFocused,
+                        } }}/>
           </div>
         </Box>
       </Toolbar>

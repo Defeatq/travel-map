@@ -21,6 +21,12 @@ const useStyles = makeStyles()({
   },
   searchInput: {
     padding: '0px 10px',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    transition: '0.3s',
+  },
+  inputFocused: {
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    transition: '0.3s',
   },
   title: {
     padding: '0px 15px',
