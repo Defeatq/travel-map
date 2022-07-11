@@ -1,10 +1,13 @@
 import { AppBar, Autocomplete, Box, TextField, Toolbar, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import useStyles from './style';
 
 function Header() {
+  const { classes } = useStyles();
+
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className={ classes.toolbar }>
         <Typography variant="h5">
           Travel Advisor
         </Typography>
@@ -12,11 +15,11 @@ function Header() {
           <Typography>
             Explore new places
           </Typography>
-          <div>
-            <div>
+          <div className={ classes.search }>
+            <div className={ classes.searchIcon }>
               <SearchIcon />
             </div>
-            <TextField label="Search" variant="outlined" InputLabelProps={{ shrink: false }}/>
+            <TextField label="Search" variant="outlined" InputLabelProps={{ shrink: false, }}/>
           </div>
         </Box>
       </Toolbar>
