@@ -19,6 +19,12 @@ const useStyles = makeStyles()({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  searchInput: {
+    padding: '0px 10px',
+  },
+  title: {
+    padding: '0px 15px',
+  }
 });
 
 export default useStyles;

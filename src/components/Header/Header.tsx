@@ -1,4 +1,4 @@
-import { AppBar, Autocomplete, Box, TextField, Toolbar, Typography } from '@mui/material';
+import { AppBar, Autocomplete, Box, InputAdornment, TextField, Toolbar, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import useStyles from './style';
 
@@ -8,18 +8,18 @@ function Header() {
   return (
     <AppBar position="static">
       <Toolbar className={ classes.toolbar }>
-        <Typography variant="h5">
+        <Typography variant="h5" className={ classes.title }>
           Travel Advisor
         </Typography>
-        <Box display="flex">
-          <Typography>
+        <Box display="flex" alignItems="center" >
+          <Typography variant="h6" className={ classes.title }>
             Explore new places
           </Typography>
           <div className={ classes.search }>
             <div className={ classes.searchIcon }>
               <SearchIcon />
             </div>
-            <TextField label="Search" variant="outlined" InputLabelProps={{ shrink: false, }}/>
+            <TextField placeholder="Search..." label="" variant="outlined" InputProps={{ className: classes.searchInput, }}/>
           </div>
         </Box>
       </Toolbar>
