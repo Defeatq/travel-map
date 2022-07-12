@@ -1,12 +1,15 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useStyles from "./ListStyle";
 
 function List() {
   const [type, setType] = useState('');
   const [rating, setRating] = useState('');
 
+  const { classes } = useStyles();
+
   return (
-    <div>
+    <div className={ classes.details }>
       <Typography variant="h5">
         Food & Dining around you
       </Typography>
@@ -20,7 +23,7 @@ function List() {
       </FormControl>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel>Rating</InputLabel>
-        <Select value={ rating } onChange={ (event: SelectChangeEvent) => setRating(event.target.value) }>
+        <Select value={ rating } onChange={ (event: SelectChangeEvent) => setRating(event.target.value) } label="Rating">
           <MenuItem value={ 0 }>All</MenuItem>
           <MenuItem value={ 3 }>Above 3.0</MenuItem>
           <MenuItem value={ 4 }>Above 4.0</MenuItem>
