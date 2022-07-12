@@ -1,6 +1,6 @@
 import { AppBar, Autocomplete, Box, InputAdornment, TextField, Toolbar, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import useStyles from './style';
+import useStyles from './HeaderStyle';
 
 function Header() {
   const { classes } = useStyles();
