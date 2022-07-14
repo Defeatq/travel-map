@@ -25,3 +25,6 @@ dist-ssr
 
 #Token
 token.ts
+
+#Rapid-Api Key
+options.ts
