@@ -1,12 +1,15 @@
 import { CssBaseline, Grid } from '@mui/material';
+import { Provider } from 'react-redux';
 
 import Header from './components/Header/Header';
 import List from './components/List/List';
 import OverviewMap from './components/Map/Map';
 
+import store from './rtk/store';
+
 function App() {
   return (
-    <>
+    <Provider store={ store }>
       <CssBaseline />
 
       <Header />
@@ -20,7 +23,7 @@ function App() {
           <OverviewMap />
         </Grid>
       </Grid>
-    </>
+    </Provider>
   )
 }
 
