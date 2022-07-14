@@ -1,7 +1,10 @@
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { useState } from "react";
-import useStyles from "./ListStyle";
 
+import { useSelector } from "react-redux";
+
+import { RootState } from "../../rtk/store";
+import useStyles from "./ListStyle";
 import DetailsCard from '../DetailsCard/DetailsCard';
 
 function List() {
@@ -10,24 +13,7 @@ function List() {
 
   const { classes } = useStyles();
 
-  const places = [
-    {name: 'nice'},
-    {name: 'cool'},
-    {name: 'great'},
-    {name: 'good'},
-    {name: 'nice'},
-    {name: 'cool'},
-    {name: 'great'},
-    {name: 'good'},
-    {name: 'nice'},
-    {name: 'cool'},
-    {name: 'great'},
-    {name: 'good'},
-    {name: 'nice'},
-    {name: 'cool'},
-    {name: 'great'},
-    {name: 'good'},
-  ];
+  const places = useSelector((state: RootState) => state.places);
 
   return (
     <div className={ classes.details }>
@@ -54,7 +40,7 @@ function List() {
         </FormControl>
       </div>
       <Grid container spacing={ 3 } className={ classes.list }>
-        { places?.map((place, i) => <Grid item xs={ 12 }> <DetailsCard key={ i } place={ place } /> </Grid>) }
+        { places?.map((place, i) => <Grid key={ i } item xs={ 12 }> <DetailsCard place={ place } /> </Grid>) }
       </Grid>
     </div>
   )
