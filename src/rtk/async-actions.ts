@@ -12,9 +12,13 @@ interface Bounds {
 
 function setPlacesAsync(bounds: Bounds) {
   return async function (dispatch: AppDispatch) {
-    const response = await fetch(getUrlBoundsList(bounds), options);
-    const json = await response.json();
-    dispatch(setPlaces(json.data));
+    try {
+      const response = await fetch(getUrlBoundsList(bounds), options);
+      const json = await response.json();
+      dispatch(setPlaces(json.data));
+    } catch(error) {
+      console.log(error);
+    }
   }
 }
 
