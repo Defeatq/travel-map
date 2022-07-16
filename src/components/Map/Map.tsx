@@ -1,11 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { CSSProperties, useEffect, useMemo, useRef } from 'react';
 import Map from 'react-map-gl';
 
 import token from '../../token'; // Mapbox token
 import { setBounds } from '../../rtk/actions';
 import { RootState, AppDispatch } from '../../rtk/store';
+import useStyles from './MapStyle';
 
-import { MapRef } from 'react-map-gl';
+import { MapRef, Marker } from 'react-map-gl';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import setPlacesAsync from '../../rtk/async-actions';
 
@@ -14,6 +15,22 @@ function OverviewMap() {
   // const store = useStore<RootState>();
   const dispatch = useDispatch<AppDispatch>();
   const bounds = useSelector((state: RootState) => state.bounds);
+  const places = useSelector((state: RootState) => state.places);
+
+  const { classes } = useStyles();
+
+  const markers = useMemo(() => 
+  places?.map((place, i) =>
+    <Marker 
+      key={ i } 
+      longitude={ place.longitude ? place?.longitude : 0 } 
+      latitude={ place.latitude ? place?.latitude : 0 } 
+      anchor="bottom"
+    >
+      <img src={ place.photo ? place?.photo?.images?.large?.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'  } className={ classes.marker }/>
+    </Marker>
+  )
+, [places]);
 
   const onChange = () => {
     dispatch(setBounds(mapRef.current?.getBounds()));
@@ -43,13 +60,17 @@ function OverviewMap() {
         longitude: -122.4,
         latitude: 37.8,
         zoom: 14,
+        bearing: 0,
+        pitch: 0,
       }}
       mapboxAccessToken={ token }
-      style={{width: '100%', height: '80vh'}}
+      style={{width: '100%', height: '85vh'}}
       mapStyle="mapbox://styles/mapbox/streets-v9"
       onLoad={ onChange }
       onMoveEnd={ onChange }
-    />
+    >
+      { markers }
+    </Map>
   )
 }
 
