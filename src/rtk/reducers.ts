@@ -1,11 +1,15 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { LngLatBounds } from "mapbox-gl";
 
-import { setBounds, setPlaces } from "./actions";
+import { setBounds, setPlaces, setRating, setType } from "./actions";
 
 const initialState = {
   bounds: LngLatBounds,
   places: [],
+  filters: {
+    type: 'restaurants',
+    rating: 0.0,
+  }
 }
 
 const coordinatesReducer = createReducer(initialState, (builder) => 
@@ -18,6 +22,16 @@ const coordinatesReducer = createReducer(initialState, (builder) =>
       Object.assign(state, {
         places: action.payload,
       })})
+    .addCase(setType, (state, action) => {
+      const newPlaceType = action.payload;
+
+      state.filters.type = newPlaceType;
+    })
+    .addCase(setRating, (state, action) => {
+      const newRatingAbove = action.payload;
+
+      state.filters.rating = newRatingAbove;
+    })
 );
 
 export default coordinatesReducer;
