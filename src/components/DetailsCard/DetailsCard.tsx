@@ -13,7 +13,13 @@ import {
 import PlaceIcon from '@mui/icons-material/Place';
 import PhoneIcon from '@mui/icons-material/Phone';
 
-import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
+import { 
+  ReactElement, 
+  JSXElementConstructor, 
+  ReactFragment, 
+  ReactPortal, 
+  Key 
+} from "react";
 
 import { CardInterface } from '../../rtk/store';
 import useStyles from "./DetailsCardStyle";
