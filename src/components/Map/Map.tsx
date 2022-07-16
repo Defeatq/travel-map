@@ -1,14 +1,15 @@
 import { CSSProperties, useEffect, useMemo, useRef } from 'react';
-import Map from 'react-map-gl';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 
 import token from '../../token'; // Mapbox token
 import { setBounds } from '../../rtk/actions';
-import { RootState, AppDispatch } from '../../rtk/store';
+import setPlacesAsync from '../../rtk/async-actions';
+import { RootState, AppDispatch, CardInterface } from '../../rtk/store';
 import useStyles from './MapStyle';
 
+import Map from 'react-map-gl';
 import { MapRef, Marker } from 'react-map-gl';
-import { useDispatch, useSelector, useStore } from 'react-redux';
-import setPlacesAsync from '../../rtk/async-actions';
+import { Paper, Rating, Typography } from '@mui/material';
 
 function OverviewMap() {
   const mapRef = useRef<MapRef>();
@@ -20,17 +21,26 @@ function OverviewMap() {
   const { classes } = useStyles();
 
   const markers = useMemo(() => 
-  places?.map((place, i) =>
-    <Marker 
-      key={ i } 
-      longitude={ place.longitude ? place?.longitude : 0 } 
-      latitude={ place.latitude ? place?.latitude : 0 } 
-      anchor="bottom"
-    >
-      <img src={ place.photo ? place?.photo?.images?.large?.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'  } className={ classes.marker }/>
-    </Marker>
-  )
-, [places]);
+    places?.map((place: CardInterface, i: number) => {
+      const hasCoordinates = place.latitude as boolean;
+
+      if ( hasCoordinates ) {
+        return <Marker 
+          key={ i } 
+          longitude={ place.longitude } 
+          latitude={ place.latitude } 
+          anchor="bottom"
+        >
+          <Paper elevation={ 4 } className={ classes.marker }>
+            <Typography variant="subtitle1" className={ classes.markerTitle }>
+              { place.name }
+            </Typography>
+            <img src={ place.photo ? place.photo?.images?.large?.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg' } className={ classes.markerIcon }/>
+            <Rating name="rating" size="small" value={ place?.rating } precision={ 0.5 } readOnly className={ classes.markerRating }/>
+          </Paper>
+        </Marker>
+      }
+    }), [places]);
 
   const onChange = () => {
     dispatch(setBounds(mapRef.current?.getBounds()));
