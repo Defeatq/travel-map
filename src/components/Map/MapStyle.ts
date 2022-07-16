@@ -5,6 +5,10 @@ const useStyles = makeStyles()(
     map: {
       width: '100%',
       height: '80vh',
+    },
+    marker: {
+      width: '100px',
+      height: '60px',
     }
   })
 );
