@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { LngLatBounds } from "mapbox-gl";
 
-import { setBounds, setPlaces, setRating, setType } from "./actions";
+import { setBounds, setLoading, setPlaces, setRating, setType } from "./actions";
 
 const initialState = {
   bounds: LngLatBounds,
@@ -9,6 +9,9 @@ const initialState = {
   filters: {
     type: 'restaurants',
     rating: 0.0,
+  },
+  fetching: {
+    isLoading: false,
   }
 }
 
@@ -31,6 +34,11 @@ const coordinatesReducer = createReducer(initialState, (builder) =>
       const newRatingAbove = action.payload;
 
       state.filters.rating = newRatingAbove;
+    })
+    .addCase(setLoading, (state, action) => {
+      const loading = action.payload;
+
+      state.fetching.isLoading = loading;
     })
 );
 

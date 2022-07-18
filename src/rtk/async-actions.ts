@@ -1,6 +1,6 @@
 import getUrlBoundsList from "../api-requests/URLS";
-import { setPlaces } from "./actions";
-import { AppDispatch } from "./store";
+import { setLoading, setPlaces } from "./actions";
+import store, { AppDispatch } from "./store";
 import options from '../api-requests/options';
 
 interface Bounds {
@@ -13,9 +13,13 @@ interface Bounds {
 function setPlacesAsync(bounds: Bounds) {
   return async function (dispatch: AppDispatch) {
     try {
+      dispatch(setLoading(!store.getState().fetching.isLoading));
+
       const response = await fetch(getUrlBoundsList(bounds), options);
       const json = await response.json();
       dispatch(setPlaces(json.data));
+      
+      dispatch(setLoading(!store.getState().fetching.isLoading));
     } catch(error) {
       console.log(error);
     }
