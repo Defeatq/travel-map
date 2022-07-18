@@ -112,6 +112,10 @@ function DetailsCard( props: CardInterface ) {
         </CardActions>
       </Card>
     )
+  } else {
+    return (
+      <div></div>
+    )
   }
 }
 

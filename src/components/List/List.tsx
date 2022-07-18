@@ -16,12 +16,14 @@ import { setRating, setType } from "../../rtk/actions";
 
 import useStyles from "./ListStyle";
 import DetailsCard from '../DetailsCard/DetailsCard';
+import Spinner from "../Spinner/Spinner";
 
 function List() {
   const dispatch = useDispatch<AppDispatch>();
   const places = useSelector((state: RootState) => state.places);
   const type = useSelector((state: RootState) => state.filters.type);
   const rating = useSelector((state: RootState) => state.filters.rating);
+  const isLoading = useSelector((state: RootState) => state.fetching.isLoading);
 
   const { classes } = useStyles();
 
@@ -49,9 +51,13 @@ function List() {
           </Select>
         </FormControl>
       </div>
-      <Grid container spacing={ 3 } className={ classes.list }>
-        { places?.map((place, i) => <Grid key={ i } item xs={ 12 }> <DetailsCard place={ place } /> </Grid>) }
-      </Grid>
+      {
+        isLoading ? 
+        <Spinner /> :
+        <Grid container spacing={ 3 } className={ classes.list }>
+          { places?.map((place, i) => <Grid key={ i } item xs={ 12 }> <DetailsCard place={ place } /> </Grid>) }
+        </Grid>
+      }
     </div>
   )
 }
