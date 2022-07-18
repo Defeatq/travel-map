@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 
 import token from '../../token'; // Mapbox token
@@ -17,30 +17,9 @@ function OverviewMap() {
   const dispatch = useDispatch<AppDispatch>();
   const bounds = useSelector((state: RootState) => state.bounds);
   const places = useSelector((state: RootState) => state.places);
+  const [activeIndex, setActiveIndex] = useState<any>(0);
 
   const { classes } = useStyles();
-
-  const markers = useMemo(() => 
-    places?.map((place: CardInterface, i: number) => {
-      const hasCoordinates = place.latitude as boolean;
-
-      if ( hasCoordinates ) {
-        return <Marker 
-          key={ i } 
-          longitude={ place.longitude } 
-          latitude={ place.latitude } 
-          anchor="bottom"
-        >
-          <Paper elevation={ 4 } className={ classes.marker }>
-            <Typography variant="subtitle1" className={ classes.markerTitle }>
-              { place.name }
-            </Typography>
-            <img src={ place.photo ? place.photo?.images?.large?.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg' } className={ classes.markerIcon }/>
-            <Rating name="rating" size="small" value={ place?.rating } precision={ 0.5 } readOnly className={ classes.markerRating }/>
-          </Paper>
-        </Marker>
-      }
-    }), [places]);
 
   const onChange = () => {
     dispatch(setBounds(mapRef.current?.getBounds()));
@@ -79,7 +58,34 @@ function OverviewMap() {
       onLoad={ onChange }
       onMoveEnd={ onChange }
     >
-      { markers }
+      { 
+        places?.map((place: CardInterface, index: number) => {
+          const hasCoordinates = place.latitude as boolean;
+    
+          if ( hasCoordinates ) {
+            return <div
+              onMouseEnter={ () => setActiveIndex(index) }
+              onMouseLeave={ () => setActiveIndex(undefined) }
+            >
+              <Marker 
+                key={ index }
+                style={{ zIndex: activeIndex === index ? 3 : "unset" }}
+                longitude={ place.longitude } 
+                latitude={ place.latitude } 
+                anchor="bottom"
+              >
+                <Paper elevation={ 4 } className={ classes.marker }>
+                  <Typography variant="subtitle1" className={ classes.markerTitle }>
+                    { place.name }
+                  </Typography>
+                  <img src={ place.photo ? place.photo?.images?.large?.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg' } className={ classes.markerIcon }/>
+                  <Rating name="rating" size="small" value={ place?.rating } precision={ 0.5 } readOnly className={ classes.markerRating }/>
+                </Paper>
+              </Marker>
+            </div>
+          }
+        })
+      }
     </Map>
   )
 }
