@@ -53,7 +53,7 @@ function OverviewMap() {
         pitch: 0,
       }}
       mapboxAccessToken={ token }
-      style={{width: '100%', height: '85vh'}}
+      style={{ width: '100%', height: '85vh' }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
       onLoad={ onChange }
       onMoveEnd={ onChange }
@@ -64,11 +64,11 @@ function OverviewMap() {
     
           if ( hasCoordinates ) {
             return <div
+              key={ index }
               onMouseEnter={ () => setActiveIndex(index) }
               onMouseLeave={ () => setActiveIndex(undefined) }
             >
               <Marker 
-                key={ index }
                 style={{ zIndex: activeIndex === index ? 3 : "unset" }}
                 longitude={ place.longitude } 
                 latitude={ place.latitude } 
