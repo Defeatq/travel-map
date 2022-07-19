@@ -1,7 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { LngLatBounds } from "mapbox-gl";
 
-import { setBounds, setLoading, setPlaces, setRating, setType } from "./actions";
+import { 
+  setBounds, 
+  setLoading, 
+  setPlaces, 
+  setRating, 
+  setType 
+} from "./actions";
 
 const initialState = {
   bounds: LngLatBounds,
