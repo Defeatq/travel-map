@@ -11,7 +11,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { RootState, AppDispatch } from "../../rtk/store";
+import { RootState, AppDispatch, CardInterface } from "../../rtk/store";
 import { setRating, setType } from "../../rtk/actions";
 
 import useStyles from "./ListStyle";
@@ -55,7 +55,16 @@ function List() {
         isLoading ? 
         <Spinner /> :
         <Grid container spacing={ 3 } className={ classes.list }>
-          { places?.map((place, i) => <Grid key={ i } item xs={ 12 }> <DetailsCard place={ place } /> </Grid>) }
+          { 
+            places?.map((place: CardInterface, i) => {
+              const numberRating = place.rating === undefined ? 0 : place.rating;
+              const isGreaterThan = numberRating >= rating;
+
+              if (isGreaterThan) {
+                return <Grid key={ i } item xs={ 12 }> <DetailsCard place={ place } /> </Grid>
+              }
+            }) 
+          }
         </Grid>
       }
     </div>

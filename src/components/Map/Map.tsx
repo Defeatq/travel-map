@@ -42,7 +42,7 @@ function OverviewMap() {
       //   tr_latitude: bounds?._ne.lat,
       // }));
     }
-  }, [bounds, type, rating]);
+  }, [bounds, type]);
 
   return (
     <Map
@@ -63,8 +63,10 @@ function OverviewMap() {
       { 
         places?.map((place: CardInterface, index: number) => {
           const hasCoordinates = place.latitude as boolean;
+          const numberRating = place.rating === undefined ? 0 : place.rating;
+          const isGreaterThan = numberRating as number >= rating;
     
-          if ( hasCoordinates ) {
+          if ( hasCoordinates && isGreaterThan ) {
             return <div
               key={ index }
               onMouseEnter={ () => setActiveIndex(index) }
