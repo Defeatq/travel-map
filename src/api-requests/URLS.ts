@@ -1,8 +1,11 @@
+import store from '../rtk/store';
+
 interface Params {
   bl_latitude: number,
   bl_longitude: number,
   tr_longitude: number,
   tr_latitude: number,
+  min_rating?: number,
   // offset?: number,
   // limit?: number,
   // child_rm_ages?: string,
@@ -18,7 +21,7 @@ interface Params {
 }
 
 function getUrlBoundsList (params: Params) {
-  return `https://travel-advisor.p.rapidapi.com/hotels/list-in-boundary?bl_latitude=${ params.bl_latitude }&bl_longitude=${ params.bl_longitude }&tr_longitude=${ params.tr_longitude }&tr_latitude=${ params.tr_latitude }`
+  return `https://travel-advisor.p.rapidapi.com/${ store.getState().filters.type }/list-in-boundary?bl_latitude=${ params.bl_latitude }&bl_longitude=${ params.bl_longitude }&tr_longitude=${ params.tr_longitude }&tr_latitude=${ params.tr_latitude }&min_rating=${ store.getState().filters.rating }`
 }
 
 export default getUrlBoundsList;

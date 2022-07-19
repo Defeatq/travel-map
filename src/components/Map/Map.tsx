@@ -17,6 +17,8 @@ function OverviewMap() {
   const dispatch = useDispatch<AppDispatch>();
   const bounds = useSelector((state: RootState) => state.bounds);
   const places = useSelector((state: RootState) => state.places);
+  const type = useSelector((state: RootState) => state.filters.type);
+  const rating = useSelector((state: RootState) => state.filters.rating);
   const [activeIndex, setActiveIndex] = useState<any>(0);
 
   const { classes } = useStyles();
@@ -40,7 +42,7 @@ function OverviewMap() {
       //   tr_latitude: bounds?._ne.lat,
       // }));
     }
-  }, [bounds]);
+  }, [bounds, type, rating]);
 
   return (
     <Map
