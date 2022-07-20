@@ -3,7 +3,7 @@ import { useDispatch, useSelector, useStore } from 'react-redux';
 
 import token from '../../token'; // Mapbox token
 import { setBounds } from '../../rtk/actions';
-import setPlacesAsync from '../../rtk/async-actions';
+import { setPlacesAsync } from '../../rtk/async-actions';
 import { RootState, AppDispatch, CardInterface } from '../../rtk/store';
 import useStyles from './MapStyle';
 

@@ -7,6 +7,8 @@ const ACTION_NAMES = {
   SET_TYPE: 'SET_TYPE',
   SET_RATING: 'SET_RATING',
   SET_LOADING: 'SET_LOADING',
+  SET_AUTOCOMPLETE_RESULTS: 'SET_AUTOCOMPLETE_RESULTS',
+  SET_AUTOCOMPLETE_LOADING: 'SET_AUTOCOMPLETE_LOADING',
 };
 
 const setBounds = createAction<LngLatBounds | undefined>(ACTION_NAMES.SET_BOUNDS);
@@ -17,11 +19,14 @@ const setRating = createAction<number>(ACTION_NAMES.SET_RATING);
 
 const setLoading = createAction<boolean>(ACTION_NAMES.SET_LOADING);
 
+const setAutoCompleteResults = createAction<object>(ACTION_NAMES.SET_AUTOCOMPLETE_RESULTS);
+
 export { 
   ACTION_NAMES, 
   setBounds, 
   setPlaces, 
   setType, 
   setRating, 
-  setLoading 
+  setLoading,
+  setAutoCompleteResults,
 };
