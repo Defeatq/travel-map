@@ -2,13 +2,14 @@ import { createReducer } from "@reduxjs/toolkit";
 import { LngLatBounds } from "mapbox-gl";
 
 import { 
+  setAutoCompleteResults,
   setBounds, 
   setLoading, 
   setPlaces, 
   setRating, 
   setType 
 } from "./actions";
-
+// todo: Types
 const initialState = {
   bounds: LngLatBounds,
   places: [],
@@ -18,6 +19,9 @@ const initialState = {
   },
   fetching: {
     isLoading: false,
+  },
+  autocomplete: {
+    results: [],
   }
 }
 
@@ -30,6 +34,12 @@ const coordinatesReducer = createReducer(initialState, (builder) =>
     .addCase(setPlaces, (state, action) => {
       Object.assign(state, {
         places: action.payload,
+      })})
+    .addCase(setAutoCompleteResults, (state, action) => {
+      Object.assign(state, {
+        autocomplete: {
+          results: action.payload,
+        },
       })})
     .addCase(setType, (state, action) => {
       const newPlaceType = action.payload;
