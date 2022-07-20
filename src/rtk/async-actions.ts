@@ -1,5 +1,9 @@
-import getUrlBoundsList from "../api-requests/URLS";
-import { setLoading, setPlaces } from "./actions";
+import { getUrlBoundsList, getAutoCompleteUrl } from "../api-requests/URLS";
+import { 
+  setLoading, 
+  setPlaces, 
+  setAutoCompleteResults,
+} from "./actions";
 import store, { AppDispatch } from "./store";
 import options from '../api-requests/options';
 
@@ -26,4 +30,19 @@ function setPlacesAsync(bounds: Bounds) {
   }
 }
 
-export default setPlacesAsync;
+function setAutocompleteResultsAsync(text: string) {
+  return async function (dispatch: AppDispatch) {
+    try {
+      const response = await fetch(getAutoCompleteUrl(text), options);
+      const json = await response.json();
+      dispatch(setAutoCompleteResults(json.data.Typeahead_autocomplete.results));
+    } catch(error) {
+      console.log(error);
+    }
+  }
+}
+
+export {
+  setPlacesAsync,
+  setAutocompleteResultsAsync,
+};
