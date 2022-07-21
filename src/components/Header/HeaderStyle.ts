@@ -30,6 +30,9 @@ const useStyles = makeStyles()({
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     transition: '0.3s',
   },
+  inputOutlineRoot: {
+    padding: 0,
+  },
   title: {
     padding: '0px 15px',
   }
