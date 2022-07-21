@@ -42,37 +42,38 @@ function Header() {
           <Typography variant="h6" className={ classes.title }>
             Explore new places
           </Typography>
-          <Autocomplete
-            freeSolo
-            disableClearable
-            options={ 
-              autoCompleteResults.map((option) => 
-                option.text ? option.text : option?.detailsV2?.names?.name
-              ) 
-            }
-            renderInput={ (params) => (
-              <div className={ classes.search }>
-                <div className={ classes.searchIcon }>
-                  <SearchIcon />
-                </div>
+          <div className={ classes.search }>
+            <div className={ classes.searchIcon }>
+              <SearchIcon />
+            </div>
+            <Autocomplete
+              freeSolo
+              disableClearable
+              options={ 
+                autoCompleteResults.map((option) => 
+                  option.text ? option.text : option?.detailsV2?.names?.name
+                ) 
+              }
+              renderInput={ (params) => (
                 <TextField
                   { ...params }
                   value={ value }
                   onChange={ (event) => setValue(event.target.value) }
                   placeholder="Search..." 
                   label="" 
-                  variant="outlined" 
+                  variant="outlined"
                   InputProps={{
                     ...params.InputProps,
                     type: 'search',
-                    className: classes.searchInput, 
+                    className: classes.searchInput,
                     classes: { 
                       focused: classes.inputFocused,
+                      root: classes.inputOutlineRoot,
                     } }}
                 />
-              </div>
-            ) }
-          />
+              ) }
+            />
+          </div>
         </Box>
       </Toolbar>
     </AppBar>
