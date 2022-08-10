@@ -10,6 +10,7 @@ import useStyles from './MapStyle';
 import Map from 'react-map-gl';
 import { MapRef, Marker } from 'react-map-gl';
 import { Paper, Rating, Typography } from '@mui/material';
+import { getUrlBoundsList } from '../../api-requests/URLS';
 
 function OverviewMap() {
   const mapRef = useRef<MapRef>();
@@ -31,16 +32,14 @@ function OverviewMap() {
     const isRendered = (bounds._ne) as boolean;
 
     if (isRendered) {
-      console.log(bounds);
+      // console.log(bounds);
 
-      // Uncomment this when you're gonna use or test the app
-
-      // dispatch<AppDispatch>(setPlacesAsync({
+      // dispatch<AppDispatch>(setPlacesAsync(getUrlBoundsList({
       //   bl_latitude: bounds?._sw.lat,
       //   bl_longitude: bounds?._sw.lng,
       //   tr_longitude: bounds?._ne.lng,
       //   tr_latitude: bounds?._ne.lat,
-      // }));
+      // })));
     }
   }, [bounds, type]);
 

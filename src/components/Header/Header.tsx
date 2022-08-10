@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, FormEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { 
@@ -9,17 +9,17 @@ import {
   Toolbar, 
   Typography 
 } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 
 import useStyles from './HeaderStyle';
-import { setAutocompleteResultsAsync } from '../../rtk/async-actions';
+import { setAutocompleteResultsAsync, setPlacesAsync } from '../../rtk/async-actions';
 import { RootState, AppDispatch } from '../../rtk/store';
 import { useDebounce } from 'use-debounce';
+import { getPlacesByNameUrl } from '../../api-requests/URLS';
 
 function Header() {
   const [value, setValue] = useState<string>('');
   const autoCompleteResults = useSelector((state: RootState) => state.autocomplete.results);
-  const loadin = useSelector((state: RootState) => state.autocomplete.loading);
+  const places = useSelector((state: RootState) => state.places);
   const dispatch = useDispatch<AppDispatch>();
 
   const { classes } = useStyles();
@@ -27,14 +27,12 @@ function Header() {
   const [text] = useDebounce(value, 500);
 
   useEffect(() => {
-    // uncomment this when you're gonna use or test the app
-
     // dispatch(setAutocompleteResultsAsync(text));
   }, [text]);
 
   useEffect(() => {
-    console.log(loadin);
-  }, [loadin]);
+    console.log(places);
+  }, [places]);
 
   return (
     <AppBar position="static">
@@ -46,7 +44,12 @@ function Header() {
           <Typography variant="h6" className={ classes.title }>
             Explore new places
           </Typography>
-          <div className={ classes.search }>
+          <form className={ classes.search } onSubmit={ (event) => {
+            event.preventDefault();
+
+            // dispatch(setPlacesAsync(getPlacesByNameUrl(value)));
+            setValue('');
+          } }>
             <Autocomplete
               freeSolo
               disableClearable
@@ -58,6 +61,7 @@ function Header() {
                   option.text ? option.text : option?.detailsV2?.names?.name
                 ) 
               }
+              onChange={ (event, value) => setValue(value) }
               renderInput={ (params) => (
                 <TextField
                   { ...params }
@@ -77,7 +81,7 @@ function Header() {
                 />
               ) }
             />
-          </div>
+          </form>
         </Box>
       </Toolbar>
     </AppBar>
