@@ -34,8 +34,10 @@ const coordinatesReducer = createReducer(initialState, (builder) =>
         bounds: action.payload,
       })})
     .addCase(setPlaces, (state, action) => {
+      const places = action.payload?.map((place: { result_object?: object }) => place.result_object ? place.result_object : place);
+
       Object.assign(state, {
-        places: action.payload,
+        places: places,
       })})
     .addCase(setAutoCompleteResults, (state, action) => {
       Object.assign(state, {
