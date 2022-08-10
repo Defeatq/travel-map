@@ -18,6 +18,7 @@ import { RootState, AppDispatch } from '../../rtk/store';
 function Header() {
   const [value, setValue] = useState<string>('');
   const autoCompleteResults = useSelector((state: RootState) => state.autocomplete.results);
+  const loadin = useSelector((state: RootState) => state.autocomplete.loading);
   const dispatch = useDispatch<AppDispatch>();
 
   const { classes } = useStyles();
@@ -31,6 +32,10 @@ function Header() {
   useEffect(() => {
     console.log(autoCompleteResults);
   }, [autoCompleteResults]);
+
+  useEffect(() => {
+    console.log(loadin);
+  }, [loadin]);
 
   return (
     <AppBar position="static">
@@ -50,7 +55,10 @@ function Header() {
               freeSolo
               disableClearable
               options={ 
-                autoCompleteResults.map((option) => 
+                autoCompleteResults.map((option: { 
+                  text?: string, 
+                  detailsV2?: { names?: { name?: string, } } 
+                }) => 
                   option.text ? option.text : option?.detailsV2?.names?.name
                 ) 
               }
