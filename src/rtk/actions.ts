@@ -20,6 +20,7 @@ const setRating = createAction<number>(ACTION_NAMES.SET_RATING);
 const setLoading = createAction<boolean>(ACTION_NAMES.SET_LOADING);
 
 const setAutoCompleteResults = createAction<object>(ACTION_NAMES.SET_AUTOCOMPLETE_RESULTS);
+const setAutoCompleteLoading = createAction<boolean>(ACTION_NAMES.SET_AUTOCOMPLETE_LOADING);
 
 export { 
   ACTION_NAMES, 
@@ -29,4 +30,5 @@ export {
   setRating, 
   setLoading,
   setAutoCompleteResults,
+  setAutoCompleteLoading,
 };

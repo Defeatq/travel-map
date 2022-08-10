@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { LngLatBounds } from "mapbox-gl";
 
 import { 
+  setAutoCompleteLoading,
   setAutoCompleteResults,
   setBounds, 
   setLoading, 
@@ -22,6 +23,7 @@ const initialState = {
   },
   autocomplete: {
     results: [],
+    loading: false,
   }
 }
 
@@ -55,6 +57,11 @@ const coordinatesReducer = createReducer(initialState, (builder) =>
       const loading = action.payload;
 
       state.fetching.isLoading = loading;
+    })
+    .addCase(setAutoCompleteLoading, (state, action) => {
+      const loading = action.payload;
+
+      state.autocomplete.loading = loading;
     })
 );
 
