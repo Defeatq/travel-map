@@ -23,11 +23,11 @@ const useStyles = makeStyles()({
   searchInput: {
     maxHeight: '40px',
     padding: '0px 20px',
-    backgroundColor: 'rgba(0, 0, 0, 0)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
     transition: '0.3s',
   },
   inputFocused: {
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    outlineColor: 'rgba(0, 0, 0, 1)',
     transition: '0.3s',
   },
   inputOutlineRoot: {

@@ -14,6 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import useStyles from './HeaderStyle';
 import { setAutocompleteResultsAsync } from '../../rtk/async-actions';
 import { RootState, AppDispatch } from '../../rtk/store';
+import { useDebounce } from 'use-debounce';
 
 function Header() {
   const [value, setValue] = useState<string>('');
@@ -23,15 +24,13 @@ function Header() {
 
   const { classes } = useStyles();
 
+  const [text] = useDebounce(value, 500);
+
   useEffect(() => {
     // uncomment this when you're gonna use or test the app
 
-    // dispatch(setAutocompleteResultsAsync(value));
-  }, [value]);
-
-  useEffect(() => {
-    console.log(autoCompleteResults);
-  }, [autoCompleteResults]);
+    // dispatch(setAutocompleteResultsAsync(text));
+  }, [text]);
 
   useEffect(() => {
     console.log(loadin);
@@ -48,9 +47,6 @@ function Header() {
             Explore new places
           </Typography>
           <div className={ classes.search }>
-            <div className={ classes.searchIcon }>
-              <SearchIcon />
-            </div>
             <Autocomplete
               freeSolo
               disableClearable

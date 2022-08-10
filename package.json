@@ -19,7 +19,8 @@
     "react-map-gl": "^7.0.17",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
-    "tss-react": "^3.7.1"
+    "tss-react": "^3.7.1",
+    "use-debounce": "^8.0.3"
   },
   "devDependencies": {
     "@redux-devtools/core": "^3.13.1",
