@@ -24,7 +24,10 @@ const getUrlBoundsList = (params: Params) => `https://travel-advisor.p.rapidapi.
 
 const getAutoCompleteUrl = (text: string) => `https://travel-advisor.p.rapidapi.com/locations/v2/auto-complete?query=${ encodeURIComponent(text) }&lang=en_US&units=km`;
 
+const getPlacesByNameUrl = (text: string) => `https://travel-advisor.p.rapidapi.com/locations/search?query=${ encodeURIComponent(text) }&limit=30&offset=0&units=km&location_id=1&currency=USD&sort=relevance&lang=en_US`;
+
 export {
   getUrlBoundsList,
   getAutoCompleteUrl,
+  getPlacesByNameUrl,
 }

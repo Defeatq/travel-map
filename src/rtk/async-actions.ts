@@ -8,19 +8,12 @@ import {
 import { AppDispatch } from "./store";
 import options from '../api-requests/options';
 
-interface Bounds {
-  bl_latitude: number,
-  bl_longitude: number,
-  tr_longitude: number,
-  tr_latitude: number,
-}
-
-function setPlacesAsync(bounds: Bounds) {
+function setPlacesAsync(url: string) {
   return async function (dispatch: AppDispatch) {
     try {
       dispatch(setLoading(true));
 
-      const response = await fetch(getUrlBoundsList(bounds), options);
+      const response = await fetch(url, options);
       const json = await response.json();
       dispatch(setPlaces(json.data));
       

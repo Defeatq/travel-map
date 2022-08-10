@@ -12,7 +12,7 @@ const ACTION_NAMES = {
 };
 
 const setBounds = createAction<LngLatBounds | undefined>(ACTION_NAMES.SET_BOUNDS);
-const setPlaces = createAction<object>(ACTION_NAMES.SET_PLACES);
+const setPlaces = createAction<[]>(ACTION_NAMES.SET_PLACES);
 
 const setType = createAction<string>(ACTION_NAMES.SET_TYPE);
 const setRating = createAction<number>(ACTION_NAMES.SET_RATING);
