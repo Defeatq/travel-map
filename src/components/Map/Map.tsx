@@ -6,6 +6,7 @@ import { setBounds } from '../../rtk/actions';
 import { setPlacesAsync } from '../../rtk/async-actions';
 import { RootState, AppDispatch, CardInterface } from '../../rtk/store';
 import useStyles from './MapStyle';
+import { Bounds } from '../../types/types';
 
 import Map from 'react-map-gl';
 import { MapRef, Marker } from 'react-map-gl';
@@ -14,9 +15,8 @@ import { getUrlBoundsList } from '../../api-requests/URLS';
 
 function OverviewMap() {
   const mapRef = useRef<MapRef>();
-  // const store = useStore<RootState>();
   const dispatch = useDispatch<AppDispatch>();
-  const bounds = useSelector((state: RootState) => state.bounds);
+  const bounds: Bounds = useSelector((state: RootState) => state.bounds);
   const places = useSelector((state: RootState) => state.places);
   const type = useSelector((state: RootState) => state.filters.type);
   const rating = useSelector((state: RootState) => state.filters.rating);
@@ -29,17 +29,17 @@ function OverviewMap() {
   };
 
   useEffect(() => {
-    const isRendered = (bounds._ne) as boolean;
+    const isRendered = (bounds._ne) as any as boolean;
 
     if (isRendered) {
       // console.log(bounds);
 
-      // dispatch<AppDispatch>(setPlacesAsync(getUrlBoundsList({
-      //   bl_latitude: bounds?._sw.lat,
-      //   bl_longitude: bounds?._sw.lng,
-      //   tr_longitude: bounds?._ne.lng,
-      //   tr_latitude: bounds?._ne.lat,
-      // })));
+      dispatch<AppDispatch>(setPlacesAsync(getUrlBoundsList({
+        bl_latitude: bounds?._sw.lat,
+        bl_longitude: bounds?._sw.lng,
+        tr_longitude: bounds?._ne.lng,
+        tr_latitude: bounds?._ne.lat,
+      })));
     }
   }, [bounds, type]);
 

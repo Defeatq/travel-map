@@ -1,10 +1,10 @@
 import store from '../rtk/store';
 
 interface Params {
-  bl_latitude: number,
-  bl_longitude: number,
-  tr_longitude: number,
-  tr_latitude: number,
+  bl_latitude: number | null,
+  bl_longitude: number | null,
+  tr_longitude: number | null,
+  tr_latitude: number | null,
   min_rating?: number,
   // offset?: number,
   // limit?: number,

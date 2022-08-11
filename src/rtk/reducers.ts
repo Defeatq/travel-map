@@ -10,9 +10,19 @@ import {
   setRating, 
   setType 
 } from "./actions";
-// todo: Types
-const initialState = {
-  bounds: LngLatBounds,
+import { InitialState } from '../types/types';
+
+const initialState: InitialState = {
+  bounds: {
+    _sw: {
+      lat: null,
+      lng: null,
+    },
+    _ne: {
+      lat: null,
+      lng: null,
+    },
+  },
   places: [],
   filters: {
     type: 'restaurants',
