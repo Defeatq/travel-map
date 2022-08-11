@@ -30,10 +30,6 @@ function Header() {
     // dispatch(setAutocompleteResultsAsync(text));
   }, [text]);
 
-  useEffect(() => {
-    console.log(places);
-  }, [places]);
-
   return (
     <AppBar position="static">
       <Toolbar className={ classes.toolbar }>

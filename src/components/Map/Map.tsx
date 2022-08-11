@@ -32,14 +32,12 @@ function OverviewMap() {
     const isRendered = (bounds._ne) as any as boolean;
 
     if (isRendered) {
-      // console.log(bounds);
-
-      dispatch<AppDispatch>(setPlacesAsync(getUrlBoundsList({
-        bl_latitude: bounds?._sw.lat,
-        bl_longitude: bounds?._sw.lng,
-        tr_longitude: bounds?._ne.lng,
-        tr_latitude: bounds?._ne.lat,
-      })));
+      // dispatch<AppDispatch>(setPlacesAsync(getUrlBoundsList({
+      //   bl_latitude: bounds?._sw.lat,
+      //   bl_longitude: bounds?._sw.lng,
+      //   tr_longitude: bounds?._ne.lng,
+      //   tr_latitude: bounds?._ne.lat,
+      // })));
     }
   }, [bounds, type]);
 
